@@ -18,8 +18,8 @@ def do_pack():
 
         f_path = 'versions/web_static_{}.tgz'.format(time)
         f_size = getsize('versions/web_static_{}.tgz'.format(time))
-        print("web_static packed: versions/web_static_{}.tgz -> {}Bytes"
-                .format(time, f_size))
+        print("web_static packed: versions/web_static_{}.tgz -> \
+                {}Bytes".format(time, f_size))
         return f_size
 
     except Exception as e:
