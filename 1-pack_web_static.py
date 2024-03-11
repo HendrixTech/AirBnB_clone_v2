@@ -6,6 +6,7 @@ from fabric.api import local
 from datetime import datetime
 from os.path import getsize
 
+
 def do_pack():
     """generates a .tgz archive from the contents of the web_static folder"""
     
@@ -14,11 +15,12 @@ def do_pack():
     try:
         local("mkdir -p versions")
         local("tar -cvzf versions/web_static_{}.tgz web_static".format(time))
-    
+
         f_path = 'versions/web_static_{}.tgz'.format(time)
         f_size = getsize('versions/web_static_{}.tgz'.format(time))
-        print("web_static packed: versions/web_static_{}.tgz -> {}Bytes".format(time, f_size))
+        print("web_static packed: versions/web_static_{}.tgz -> {}Bytes"
+                .format(time, f_size))
         return f_size
-    
+
     except Exception as e:
         return None
