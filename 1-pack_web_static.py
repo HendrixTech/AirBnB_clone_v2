@@ -9,7 +9,7 @@ from os.path import getsize
 
 def do_pack():
     """generates a .tgz archive from the contents of the web_static folder"""
-    
+
     t_now = datetime.now()
     time = t_now.strftime('%Y%m%d%H%M%S')
     try:
