@@ -24,32 +24,28 @@ def do_deploy(archive_path):
         put(archive_path, '/tmp/')
 
         # create target dir
-        time = archive_path[-18:-4]
-        run('sudo mkdir -p /data/web_static/\
-                releases/web_static_{}/'.format(time))
+        file_datetime = archive_path[-18:-4]
+        run('sudo mkdir -p /data/web_static/releases/web_static_{}/'.format(file_datetime))
 
         # uncompress archive and delete .tgz
-        run('sudo tar -xzf /tmp/web_static_{}.tgz -C \
-                /data/web_static/releases/web_static_{}/'
-                .format(time, time))
+        run('sudo tar -xzf /tmp/web_static_{}.tgz -C /data/web_static/releases/web_static_{}/'.format(file_datetime, file_datetime))
 
         # remove archive
-        run('sudo rm /tmp/web_static_{}.tgz'.format(time))
+        run('sudo rm /tmp/web_static_{}.tgz'.format(file_datetime))
 
         # move contents into host web_static
-        run('sudo mv /data/web_static/releases/web_static_{}/webs_static/* \
-                /data/web_static/releases/web_static_{}/'.format(time, time))
+        run('sudo mv /data/web_static/releases/web_static_{}/web_static/* /data/web_static/releases/web_static_{}/'.format(file_datetime, file_datetime))
 
         # remove extraneous web_static dir
-        run('sudo rm -rf /data/web_static/releases/web_static_{}/web_static'
-                .format(time))
+        run('sudo rm -rf /data/web_static/releases/web_static_{}/web_static'.format(file_datetime))
 
         # delete pre-existing sym link
         run('sudo rm -rf /data/web_static/current')
 
         # re-establish symbolic link
-        run('sudo ln -s /data/web_static/releases/web_static_{}/ \
-                /data/web_static/current'.format(time))
+        run('sudo ln -s /data/web_static/releases/web_static_{}/ /data/web_static/current'.format(file_datetime))
+
+        print('New version deployed!')
     except:
         return False
 
