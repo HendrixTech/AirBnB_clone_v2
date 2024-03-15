@@ -25,25 +25,25 @@ def do_deploy(archive_path):
 
         # create target dir
         file_datetime = archive_path[-18:-4]
-        run('sudo mkdir -p /data/web_static/releases/web_static_{}/'
-                .format(file_datetime))
+        run('sudo mkdir -p /data/web_static/releases/web_static_{}/\
+                '.format(file_datetime))
 
         # uncompress archive and delete .tgz
         run('sudo tar -xzf /tmp/web_static_{}.tgz -C /data/web_static/\
-                releases/web_static_{}/'.format(file_datetime,
-                    file_datetime))
+                releases/web_static_{}/\
+                '.format(file_datetime, file_datetime))
 
         # remove archive
         run('sudo rm /tmp/web_static_{}.tgz'.format(file_datetime))
 
         # move contents into host web_static
         run('sudo mv /data/web_static/releases/web_static_{}/web_static/* \
-                /data/web_static/releases/web_static_{}/'
-                .format(file_datetime, file_datetime))
+                /data/web_static/releases/web_static_{}/\
+                '.format(file_datetime, file_datetime))
 
         # remove extraneous web_static dir
-        run('sudo rm -rf /data/web_static/releases/web_static_{}/web_static'
-                .format(file_datetime))
+        run('sudo rm -rf /data/web_static/releases/web_static_{}/\
+                web_static'.format(file_datetime))
 
         # delete pre-existing sym link
         run('sudo rm -rf /data/web_static/current')
