@@ -29,8 +29,8 @@ def do_deploy(archive_path):
                 '.format(file_datetime))
 
         # uncompress archive and delete .tgz
-        run('sudo tar -xzf /tmp/web_static_{}.tgz -C /data/web_static/\
-                releases/web_static_{}/\
+        run('sudo tar -xzf /tmp/web_static_{}.tgz -C \
+                /data/web_static/releases/web_static_{}/\
                 '.format(file_datetime, file_datetime))
 
         # remove archive
